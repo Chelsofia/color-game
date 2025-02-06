@@ -17,11 +17,11 @@ function generateRandomColor() {
 }
 
 function setNewGame() {
-  // Reset message display and clear previous buttons
+  
   messageDisplay.textContent = "";
   colorButtonsContainer.innerHTML = "";
 
-  // Generate new random colors for the game
+  
   const colors = [];
   for (let i = 0; i < 6; i++) {
     const randomColor = generateRandomColor();
@@ -44,25 +44,25 @@ function setNewGame() {
 function checkGuess(color) {
   if (color === targetColor) {
     messageDisplay.textContent = "Correct!";
-    score++; // Increment score on correct guess
+    score++; 
     scoreDisplay.textContent = `Score: ${score}`;
-    setNewGame(); // Set a new round after correct guess
+    setNewGame(); 
   } else {
     messageDisplay.textContent = "Wrong guess! Try again.";
   }
 }
 
 function startGame() {
-  score = 0; // Reset the score when starting a new game
+  score = 0; 
   scoreDisplay.textContent = `Score: ${score}`;
-  setNewGame(); // Start the first round
+  setNewGame(); 
 }
 
 function goBackToHome() {
-  window.location.href = "homepage.html"; // Redirect back to the homepage
+  window.location.href = "homepage.html"; 
 }
 
 newGameButtonHomepage.addEventListener("click", startGame);
 
-// Start the game when the page loads
+
 window.onload = startGame;
