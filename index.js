@@ -47,17 +47,15 @@ function checkGuess(color) {
     score++;
     scoreDisplay.textContent = `Score: ${score}`;
 
-    // Play correct sound
     correctSound.play();
 
-    // Delay starting a new game so the "Correct!" message can be seen
     setTimeout(() => {
       setNewGame();
-    }, 1000); // 1 second delay before starting a new round
+    }, 1000); 
   } else {
     messageDisplay.textContent = "Wrong guess! Try again.";
 
-    // Play wrong sound
+   
     wrongSound.play();
   }
 }
