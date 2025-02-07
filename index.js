@@ -6,6 +6,9 @@ const messageDisplay = document.getElementById("message");
 const scoreDisplay = document.getElementById("score");
 const newGameButtonHomepage = document.getElementById("new-game-homepage");
 
+const correctSound = document.getElementById("correct-sound");
+const wrongSound = document.getElementById("wrong-sound");
+
 let targetColor;
 let score = 0;
 
@@ -17,11 +20,9 @@ function generateRandomColor() {
 }
 
 function setNewGame() {
-  
   messageDisplay.textContent = "";
   colorButtonsContainer.innerHTML = "";
 
-  
   const colors = [];
   for (let i = 0; i < 6; i++) {
     const randomColor = generateRandomColor();
@@ -31,7 +32,6 @@ function setNewGame() {
   targetColor = colors[Math.floor(Math.random() * colors.length)];
   colorBox.style.backgroundColor = targetColor;
 
-  // Add color buttons to the container
   colors.forEach((color) => {
     const button = document.createElement("button");
     button.classList.add("color-button");
@@ -44,25 +44,34 @@ function setNewGame() {
 function checkGuess(color) {
   if (color === targetColor) {
     messageDisplay.textContent = "Correct!";
-    score++; 
+    score++;
     scoreDisplay.textContent = `Score: ${score}`;
-    setNewGame(); 
+
+    // Play correct sound
+    correctSound.play();
+
+    // Delay starting a new game so the "Correct!" message can be seen
+    setTimeout(() => {
+      setNewGame();
+    }, 1000); // 1 second delay before starting a new round
   } else {
     messageDisplay.textContent = "Wrong guess! Try again.";
+
+    // Play wrong sound
+    wrongSound.play();
   }
 }
 
 function startGame() {
-  score = 0; 
+  score = 0;
   scoreDisplay.textContent = `Score: ${score}`;
-  setNewGame(); 
+  setNewGame();
 }
 
 function goBackToHome() {
-  window.location.href = "homepage.html"; 
+  window.location.href = "homepage.html";
 }
 
 newGameButtonHomepage.addEventListener("click", startGame);
-
 
 window.onload = startGame;
